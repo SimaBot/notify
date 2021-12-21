@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SimaBot - Notify</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <a href="https://simabot.github.io/">Go to Home</a>
+    <h1>Create notification for SimaBot!</h1>
+    <h2>Editor</h2>
+    <div id="editor">   
+        <p>Type notify:</p>
+        <select id="type-notify">
+            <option value="url">From URL</option>
+            <option value="msg">From SimaBot output</option>
+            <option value="channel">From Internal Channel</option>
+        </select>
+        <p>URL/Input Message/Ext. Channel ID:</p>
+        <input type="text" id="data-notify">
+        <p>Output message:</p>
+        <input type="text" id="msg-notify">
+    </div>
+    <h2>Output</h2>
+    <textarea id="output" readonly="true"></textarea>
+    <h2>Instruction</h2>
+    <div id="instruction">
+        <p>Currently there's no guide! Report if you need instruction to <b>realsimabot@gmail.com</b></p>
+    </div>
+    <script src="notify.js"></script>
+</body>
+</html>

@@ -1,0 +1,27 @@
+body, html, input, textarea, select{
+    text-align: center;
+    color: #ffffff;
+    background-color: #000000;
+    transition: .3s cubic-bezier(0.075, 0.82, 0.165, 1) background-color;
+}
+body{
+    margin-top: 5%;
+}
+a{
+    color: rgb(0, 255, 98);
+}
+a:hover{
+    color: rgb(255, 255, 255);
+}
+input, textarea, select{
+    border: 1px solid rgb(0, 255, 98);
+    outline: none;
+}
+textarea{
+    height: 200px;
+    width: 60%;
+}
+input:active, select:active{
+    background-color: #fff;
+    color: #000000;
+}
