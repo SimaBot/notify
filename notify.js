@@ -1,9 +1,13 @@
-function create (type, data, msg){
-    return 'https://simabot.github.com/notify?type=' + type + '&data=' + btoa(encodeURIComponent(data)) + '&msg=' + encodeURIComponent(msg);
+function create (type, data, msg, name){
+    var out = 'https://simabot.github.io/notify?type=' + type + '&data=' + btoa(encodeURIComponent(data)) + '&msg=' + encodeURIComponent(msg);
+    if(name){
+        out += '&name=' + name;
+    }
+    return out;
 }
 
 function parser (url) {
-    // https://simabot.github.com/notify?type=%type%&data=%data%&msg=%msg%
+    // https://simabot.github.io/notify?type=%type%&data=%data%&msg=%msg%
 
     // % type % = url(https://youtube.com/watch?v=???), msg (find cat), channel (shindo, etc)
     // % data % =-------------^ ---------------------------------^ ----------------------^ ----^
@@ -21,16 +25,26 @@ function parser (url) {
     if (!urlObj) {
         return { error: '03' };
     }
-    if (urlObj.host != 'simabot.github.com') {
+    if (urlObj.host != 'simabot.github.io') {
         return { error: '05' };
     }
-    if (urlObj.path != '/notify') {
+    if (urlObj.pathname != '/notify') {
         return { error: '06' };
     }
     const params = urlObj.searchParams;
     var type = params.get('type');
     if (!type) {
         return { error: '07' };
+    }
+    var channelName;
+    if (type == 'channel') {
+        channelName = params.get('name');
+        if (!channelName) {
+            return { error: '13' };
+        }
+        if (!notify.channels[channelName]) {
+            return { error: '14' };
+        }
     }
     const allowedTypes = ['url', 'msg', 'channel'];
     if (allowedTypes.indexOf(type) == -1) {
@@ -46,17 +60,28 @@ function parser (url) {
         return { error: '09' };
     }
     msg = decodeURIComponent(msg);
-    return { msg: msg, type: type, data: data };
+    return { msg: msg, type: type, data: data, name: channelName };
 }
 
 const typeNotify = document.getElementById('type-notify');
 const dataNotify = document.getElementById('data-notify');
 const msgNotify = document.getElementById('msg-notify');
+const nameNotify = document.getElementById('name-notify');
 const outputElement = document.getElementById('output');
+const nameEditor = document.getElementById('name-editor');
 
 function update() {
-    const url = create(typeNotify.selectedOptions[0].value, dataNotify.value, msgNotify.value);
+    const type = typeNotify.selectedOptions[0].value;
+    if(type == 'channel') {
+        nameEditor.style.display = 'block';
+    }else{
+        nameEditor.style.display = 'none';
+    }
+
+    const url = create(type, dataNotify.value, msgNotify.value, nameNotify.selectedOptions[0].value);
     outputElement.value = url;
 }
 
-setInterval(update, 100);
+update();
+
+nameNotify.onchange = dataNotify.oninput = msgNotify.oninput = typeNotify.onchange = update;

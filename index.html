@@ -8,7 +8,7 @@
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <a href="https://simabot.github.io/">Go to Home</a>
+    <a href="https://simabot.github.io/">🏠 Go to Home</a>
     <h1>Create notification for SimaBot!</h1>
     <h2>Editor</h2>
     <div id="editor">   
@@ -18,16 +18,36 @@
             <option value="msg">From SimaBot output</option>
             <option value="channel">From Internal Channel</option>
         </select>
-        <p>URL/Input Message/Ext. Channel ID:</p>
+        <p>URL/Input Message/Int. Channel argument:</p>
         <input type="text" id="data-notify">
+        <div id="name-editor">
+            <p>Internal Channel Name</p>
+            <select id="name-notify">
+                <option value="memes">Get last post in VK group (req. id group)</option>
+                <option value="videos">Get last video on YouTube channel (req. id group)</option>
+                <option value="androidupdates">Get version of Android app on GPlay (req. app id)</option>
+                <option value="spincodes">Get spin codes for Shindo (Roblox Game)</option>
+                <option value="rblxcheat">Get last scripts for Roblox game (req. game name)</option>
+                <option value="anime">Get last episode for anime (req. index from Animelist [0-5])</option>
+                <option value="newvideobyname">Get video on YouTube (req. name)</option>
+            </select>
+        </div>
         <p>Output message:</p>
         <input type="text" id="msg-notify">
+        <br>
+        <i>Tip: Use "[]" to position output from notification in text.</i>
     </div>
-    <h2>Output</h2>
+    <h2>Generated URL:</h2>
     <textarea id="output" readonly="true"></textarea>
+    <h2>Animelist</h2>
+    <p>[ "One Piece", "Boruto: Naruto Next Generations", "That Time I Got Reincarnated as a Slime", "My Hero Academy",
+    "Pokemon" ]</p>
     <h2>Instruction</h2>
     <div id="instruction">
-        <p>Currently there's no guide! Report if you need instruction to <b>realsimabot@gmail.com</b></p>
+        <p>1. Enter what you need.</p>
+        <p>2. Send generated URL to any channel, where you need to receive notification.</p>
+        <p>3. Everything just works!</p>
+        <p>Report any questions/errors to <a href="mailto:realsimabot@gmail.com">realsimabot@gmail.com</a></p>
     </div>
     <script src="notify.js"></script>
 </body>
