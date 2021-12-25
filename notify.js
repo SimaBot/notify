@@ -70,15 +70,30 @@ const nameNotify = document.getElementById('name-notify');
 const outputElement = document.getElementById('output');
 const nameEditor = document.getElementById('name-editor');
 
+function setFromUrl(){
+    const out = parser(window.location.href);
+    if (out.error) {
+        return;
+    }
+    msgNotify.value = out.msg;
+    typeNotify.selectedOptions[0].value = out.type;
+    dataNotify.value = out.data;
+    nameNotify.selectedOptions[0].value = out.name;
+}
+
+setFromUrl();
+
 function update() {
     const type = typeNotify.selectedOptions[0].value;
+    var name = nameNotify.selectedOptions[0].value;
     if(type == 'channel') {
         nameEditor.style.display = 'block';
     }else{
+        name = null;
         nameEditor.style.display = 'none';
     }
-
-    const url = create(type, dataNotify.value, msgNotify.value, nameNotify.selectedOptions[0].value);
+    
+    const url = create(type, dataNotify.value, msgNotify.value, );
     outputElement.value = url;
 }
 
