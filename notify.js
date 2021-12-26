@@ -93,7 +93,7 @@ function update() {
         nameEditor.style.display = 'none';
     }
     
-    const url = create(type, dataNotify.value, msgNotify.value, );
+    const url = create(type, dataNotify.value, msgNotify.value, name);
     outputElement.value = url;
 }
 
